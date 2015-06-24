@@ -1,18 +1,23 @@
 /* Typography */
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #0E0766;
 }
 h1 {
-  font-size: 1em;
+  font-size: 1.4em;
   margin: 0;
   padding: 0;
 }
+h2 {
+  font-size: 1.2em;
+}
 p, label {
-  font-size: .8em;
   margin: 0;
   padding: 0;
+}
+.error {
+  color: red;
 }
 
 /* Layout */
@@ -57,6 +62,15 @@ td {
   padding: 0;
 }
 
+/*
+.ng-invalid.ng-dirty {
+  border-color: red;
+}
+.ng-valid.ng-dirty {
+    border-color: green;
+}
+*/
+
 /* MEAN Stack UI Styles  */
 #mpc {
   width: 375px;
@@ -80,6 +94,7 @@ td {
 }
 #mpc .message {
   text-align: center;
+  min-height: 1.4em;
 }
 #mpc table.results thead {
   border: solid 1px #CCCCFF;
@@ -92,12 +107,18 @@ td {
   display: block;
   width: 100%;
 }
+#mpc table.results strong {
+  font-size: 1.2em;
+}
 #mpc table.results tbody td.left {
   padding: 0 0 5px 5px;
 }
 #mpc table.results tbody td.right {
   padding: 0 5px 5px 0;
   text-align: right;
+}
+#mpc table.results span.hr {
+  min-height: 1.5em;
 }
 #mpc .copy {
   display: block;

@@ -2,55 +2,44 @@ doctype html
 html(lang='en' ng-app='mpc')
   head
     meta(charset='utf-8')
-    title= 'MEAN Stack Currency Calculator'
+    title= 'MEAN Stack Penny Converter'
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(type='text/javascript' src='/javascripts/vendor/angular/angular.min.js')
-    script(type='text/javascript' src='/javascripts/vendor/jquery/dist/jquery.min.js')
     script(type='text/javascript' src='/javascripts/mpc.js')
   body
-    #mpc
+    #mpc(ng-controller="MainController as mainCtrl")
       div.row.header-row
         h1 Coinage v1.0
       div.row.container-row
-        form(ng-controller="MainController as mainCtrl" ng-submit="mainCtrl.onSubmit()" novalidate)
+        form(name="mainForm" ng-submit="mainCtrl.onSubmit(mainForm)" novalidate)
           label(for='mpc-value') Enter monetary value for coin conversion.
-          input(id='mpc-value' name='mpc-value' type='text' ng-model="mainCtrl.inputValue")
+          input(
+            id='mpc-value' 
+            name='mpc-value' 
+            type='text' 
+            ng-model="mainCtrl.inputValue"
+            ng-pattern="/^£?[0-9]+(\.[0-9]+)?p?$/"
+            required
+          )
           input(id='mpc-submit' name='Convert' value='Convert' type='submit')
         table.results
           thead
             tr
               td(colspan='2')
-                p.message.header-row Converting {{ 12 + 12 }} pennies into coins
+                div.message.header-row
+                  p.error {{mainCtrl.errorMessage}}
+                  p {{mainCtrl.message}}
           tbody
             tr
               td.left
                 strong.hr Coin
               td.right
                 strong.hr Amount
-            tr
+            tr(ng-repeat="coin in mainCtrl.coins")
               td.left 
-                span.hr 1p
+                span.hr {{coin.name}}
               td.right 
-                span.hr 1
-            tr
-              td.left 
-                span.hr 2p
-              td.right 
-                span.hr 7
-            tr
-              td.left 
-                span.hr 50p
-              td.right 
-                span.hr 1
-            tr
-              td.left 
-                span.hr &pound;1
-              td.right 
-                span.hr 1
-            tr
-              td.left 
-                span.hr &pound;2
-              td.right 
-                span.hr 1
+                span.hr {{coin.value}}
       div.row.footer-row
+        
         p.copy &copy; Coinage 2015

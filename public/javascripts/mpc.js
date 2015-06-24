@@ -2,61 +2,89 @@
   
   var app = angular.module('mpc', []);
   
-  app.controller('MainController', function(){
+  // Array of sterling coins to convert input to
+  var coins = [
+    {
+      name: '1p',
+      value: null,
+      pennyValue: 1
+    },
+    {
+      name: '2p',
+      value: null,
+      pennyValue: 2
+    },
+    {
+      name: '50p',
+      value: null,
+      pennyValue: 50
+    },
+    {
+      name: '£1',
+      value: null,
+      pennyValue: 100
+    },
+    {
+      name: '£2',
+      value: null,
+      pennyValue: 200,
+    }
+  ];
+  
+  app.controller('MainController', function($scope){
+    
+    // Set coins
+    this.coins = coins;
+    
+    // Stores the user input value
+    this.inputValue = null;
     
     // Stores the input value converted to pennies
     this.convertedInputValue = null;
     
-    // Array of sterling coins to convert input to
-    this.coins = [
-      {
-        name: '1p',
-        defaultValue: ''
-      },
-      {
-        name: '2p',
-        defaultValue: ''
-      },
-      {
-        name: '50p',
-        defaultValue: ''
-      },
-      {
-        name: '£1',
-        defaultValue: ''
-      },
-      {
-        name: '£2',
-        defaultValue: ''
-      }
-    ];
+    // Error message when form is invalid
+    this.errorMessage = null;
     
-    /**
-     * Converts user input to the minimum amount of sterling coins
-     * Also converts the user input into pennies if not already
-     * 
-     * @param {string} inputValue Raw user input
-     * @return  int     Total convered pence
-     */
-    this.convertInput = function(inputValue) {
-      if (inputValue) {
-        
-        //@TODO Convert user input to pennies
-        this.convertedInputValue = inputValue;
-      } else {
-        this.convertedInputValue = null;
-      }
-    };
+    // Normal message
+    this.message = null;
     
     /**
      * Submit handler
      * 
+     * @param   {obj} form Angular form object
+     * @return  void
      */
-    this.onSubmit = function() {
-      console.log(this.inputValue);
-      this.convertInput(this.inputValue);
+    this.onSubmit = function(form) {
+      if (form.$invalid) {
+        this.message = null;
+        this.errorMessage = 'Invalid form input';
+        return;
+      } else {
+        this.errorMessage = null;
+      }
+      
+      // Convert to pennies by checking for decimal.
+      // If decimal is present then multiply by 100 because
+      // this indicates £'s were used.
+      if (this.inputValue.indexOf('.') !== -1) {
+        this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, '') * 100);
+      } else {
+        this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, ''));
+      }
+      this.message = 'Converting ' + this.convertedInputValue + ' pennies into coins';
+      
+      // Now calculate the values for the coins
+      // by cloning remainder and looping backwards.
+      var remainder = this.convertedInputValue;
+      for (var i = this.coins.length-1; i >= 0; --i) {
+        var coin = this.coins[i];
+        var coinValue = Math.floor(remainder / coin.pennyValue);
+        
+        // Recalculate remainder
+        remainder = remainder % coin.pennyValue;
+        this.coins[i].value = coinValue;
+      }
     };
-    
+   
   }); // End controller
-
 })();
