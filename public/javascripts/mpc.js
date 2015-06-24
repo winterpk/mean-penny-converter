@@ -67,9 +67,9 @@
       // If decimal or £ is present then multiply by 100 because
       // this indicates the value is pounds vs pennies
       if (this.inputValue.indexOf('.') !== -1 || this.inputValue.indexOf('£') !== -1) {
-        this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, '') * 100);
+        this.convertedInputValue = Math.round(this.inputValue.replace(/[^0-9.]/g, '') * 100);
       } else {
-        this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, ''));
+        this.convertedInputValue = Math.round(this.inputValue.replace(/[^0-9.]/g, ''));
       }
       this.message = 'Converting ' + this.convertedInputValue + ' pennies into coins';
       
@@ -78,6 +78,7 @@
       var remainder = this.convertedInputValue;
       for (var i = this.coins.length-1; i >= 0; --i) {
         var coin = this.coins[i];
+        console.log(remainder / coin.pennyValue);
         var coinValue = Math.floor(remainder / coin.pennyValue);
         
         // Recalculate remainder
