@@ -1,0 +1,107 @@
+/* Typography */
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #0E0766;
+}
+h1 {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+p, label {
+  font-size: .8em;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout */
+.clearfix {
+  overflow: auto;
+}
+.align-left {
+  text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.row {
+  width: 98%;
+  padding: 1%;
+  clear: both;
+}
+.hr {
+  border-bottom: solid 1px #DEDEFF;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.header-row {
+  background-color: #CCCCFF;
+}
+.container-row {
+  background-color: #F5F5FF;
+}
+.footer-row {
+  text-align: center;
+  background-color: #CCCCFF;
+}
+tr {
+  padding: 0;
+  margin: 0;
+}
+td {
+  margin: 0;
+  padding: 0;
+}
+
+/* MEAN Stack UI Styles  */
+#mpc {
+  width: 375px;
+  margin: 0 auto;
+  padding: 2px;
+  border: solid 1px #CCCCCC;
+}
+#mpc form {
+  padding-top: 17px;
+  padding-bottom: 5px;
+}
+#mpc label {
+  margin-top: 5px;
+}
+#mpc-value {
+  width: 50px;
+  margin-left: 3px;
+}
+#mpc-submit {
+  margin-left: 3px;
+}
+#mpc .message {
+  text-align: center;
+}
+#mpc table.results thead {
+  border: solid 1px #CCCCFF;
+}
+#mpc table.results tbody {
+  border: solid 1px #CCCCCC;
+  background-color: #FFFFFF;
+}
+#mpc table.results span, #mpc table.results strong {
+  display: block;
+  width: 100%;
+}
+#mpc table.results tbody td.left {
+  padding: 0 0 5px 5px;
+}
+#mpc table.results tbody td.right {
+  padding: 0 5px 5px 0;
+  text-align: right;
+}
+#mpc .copy {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: #CCCCFF;
+}
