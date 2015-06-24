@@ -64,9 +64,9 @@
       }
       
       // Convert to pennies by checking for decimal.
-      // If decimal is present then multiply by 100 because
-      // this indicates £'s were used.
-      if (this.inputValue.indexOf('.') !== -1) {
+      // If decimal or £ is present then multiply by 100 because
+      // this indicates the value is pounds vs pennies
+      if (this.inputValue.indexOf('.') !== -1 || this.inputValue.indexOf('£') !== -1) {
         this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, '') * 100);
       } else {
         this.convertedInputValue = parseInt(this.inputValue.replace(/[^0-9.]/g, ''));
